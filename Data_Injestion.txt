@@ -1,2 +1,2 @@
 Hi I am generating a git repo file.
-commit & rollback
+commit & rollbackgit merging
