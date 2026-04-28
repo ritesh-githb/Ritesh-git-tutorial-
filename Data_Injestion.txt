@@ -2,4 +2,9 @@ Hi I am generating a git repo file.
 commit & rollbackgit merging
 
 
+<<<<<<< HEAD
 Hi i am ingesting big data for using rebase.
+=======
+
+I want to learn cherry pick practically 
+>>>>>>> 3f247ba (cherry pich development)
