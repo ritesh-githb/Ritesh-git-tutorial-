@@ -1,3 +1,7 @@
 I am ingesting realtime data.
+<<<<<<< HEAD
 Need to undestand how to modified.
 hey i am available still master like main master
+=======
+Need to undestand how to modified.git
+>>>>>>> feature_ritesh_1
