@@ -116,7 +116,23 @@ demo_var = "10abc"
 
 print(demo_var.isalnum()) ## isnumeric \ isalnum
 
-## IF ELSE STATEMENT ##
+## IF ELSE STATEMENT ## 
+
+x=2000
+
+if (x==20):
+    print("x is 20")
+elif(x>100):
+    if((x>100) & (x<1000)):
+        print("Between 100 and 1000")
+    else:
+        print("greater than 1000")
+else:
+    print("x is not 20")
+    
+    
+## == if we check the condition then == used else is end of the condition \ elif \ nested if 
+
 
 
 
