@@ -330,3 +330,212 @@ my_addition(20)  ## it will work for default if we not given value otherwise it 
 def my_addition(**value_x):
         print(value_x)
 my_addition(x=20,y=30,z=40)
+
+def my_addition(*value_x):
+        print(value_x)
+my_addition(20,30,40)
+
+## LAMBDA FUNCTIONS ## lightweight functions 
+
+# def addition(x,y):
+    
+#     return x+y
+# variable_add = addition(10,50)
+# print(variable_add)
+
+addition = lambda x,y : (x+y)
+
+variable_add = addition(10,50)
+print(variable_add)
+
+## MAP , FILTER , REDUCE
+
+my_list_square = [1,2,3,4,5,6]
+
+def square (p_x):
+    ret_list = [i*i for i in p_x]
+    
+    print(ret_list)
+    
+square(my_list_square)
+
+my_list_square = [1,2,3,4,5,6]
+
+def square(p_x):
+    
+    if (p_x % 2 == 0): 
+        return p_x*p_x 
+result=list(map(square,my_list_square))
+
+print(result)
+
+result=list(filter(square,my_list_square))  ## filter to remove none 
+
+print(result)
+
+## map & filter both are inbuilt function but reduce is we need to pull from functools 
+
+from functools import reduce
+
+my_list_square = [1,2,3,4,5,6]
+
+def square(p_x,p_y):
+
+        return p_x+p_y 
+    
+result = reduce(square,my_list_square)
+
+print(result) ## ans 21 
+
+### EXCEPTIONAL HANDLING ## TRY CATCH METHOD ## IN A PYTHOND IS CALLED TRY EXCEPT METHOD 
+
+## IF YOUR ALL BLOCK OF CODE FAIL INCASE IN ANY ONE BLOCK HAVING AN ERROR BUT YOU WANT TO RUN WITH ERROR WITH ERROR LOGS THEN YOU HAVE TO USE THIS TRY EXCEPT METHOD 
+
+x = "10" 
+
+try:
+    
+    if(x>10):
+        print("x is greater than 10") 
+    
+    else:
+        print("x is not greater than 10")
+except Exception as e:
+    # print(e)
+    print(f"Hey you got the error -  {e}")
+    
+finally:
+    print("I will always run")
+    
+print("hello world")
+    
+
+## F STRING Functionallity 
+
+# name = "Ritesh Patil"
+
+# my_name_var = f"HI my name is {name}, how are you?"
+
+# print(my_name_var)
+
+## if we have a function and after that any command it will not run because after return it will take exit before return it wil run a command 
+## but if you have use finally: then it will always run 
+
+def my_fun(p_x):
+    
+    print("hello world")
+    
+    try: 
+        if(p_x % 2 == 0):
+         return 1
+    except Exception as e:
+        return e
+ 
+    finally:
+        print("helloo worlddd")
+
+my_fun(4)
+
+## global varibles in functions ##
+
+x=100
+
+def global_fun():
+    
+    global x
+    # x=20
+    print(x)
+    
+global_fun()
+
+## error for your prograam you are set forcefully error 
+
+x=100
+
+if x < 100:
+    raise ValueError(" the value is not allowed") 
+
+## E numeraate function  ## position & value in tuple   
+
+my_list = [100,200,300,400,500]
+
+for i in enumerate(my_list):
+    print(i)
+    
+    
+## OPP == OBJECT ORIENTING PROGRAMM IN PYTHON ##
+## CLASSES & OBJECTS ## whenever we create a function with in the class default parameter "SELF"  
+
+class employee():
+    
+    emp_name = 'rahul' ## inside the class variables are called Attributes
+    emp_dept = 'it'
+
+    # def info(self): 
+    def info(self,emp_name,emp_dept):  ## when passsing normal parameters then external onece
+        print(f"The employee {emp_name} works for {emp_dept}")  ## functions caleed as methods   ## when using self then inner variables 
+ 
+ ## create an object of above class 
+ 
+emp_1 = employee()
+
+print(emp_1.emp_name)    
+
+## call function 
+
+emp_1.info("ritesh","it")
+
+## employee.info(emp_1) ## class name then function name & passing paramneter of particular objext 
+
+## CONSTRUCTOR ##
+
+
+class employee():
+    
+    company_name = 'xyz'
+
+    def __init__(self,emp_name,emp_dept):
+        self.emp_name = emp_name
+        self.emp_dept = emp_dept
+        
+    def changes(self,new_company):  ## alternative to class method \\ instance method 
+        self.company_name = new_company
+        
+    @classmethod 
+    def changesinclass(cls,new_company):
+        cls.company_name = new_company
+    
+
+    # def info(self): 
+    def info(self):  ## when passsing normal parameters then external onece
+        print(f"The employee {self.emp_name} works for {self.emp_dept} in {self.company_name}")  ## functions caleed as methods   ## when using self then inner variables 
+ 
+ ## create an object of above class 
+ #### STATIC METHODS
+    #  @staticmethod
+    # def addition =(x,y):
+    # print(x+y)
+ 
+emp_1 = employee('priya','it')     ## 
+emp_2 = employee('niraj','farm')
+
+emp_1.changesinclass("new_new_company")
+
+print(emp_1.company_name)
+
+# emp_1.changes("new_company")
+
+
+emp_1.info()
+emp_2.info()
+
+emp_2.company_name = "LTFS"
+print(emp_2.company_name)
+emp_2.info()
+
+employee.company_name = "flipkart ltd"  ## changes value of object attributes
+
+emp_1.info()  ## but like this changes are not recommeds so for create for this new function
+
+############# GETTERS & SETTERS ###################
+
