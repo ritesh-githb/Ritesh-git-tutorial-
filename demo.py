@@ -490,6 +490,55 @@ emp_1.info("ritesh","it")
 ## CONSTRUCTOR ##
 
 
+# class employee():
+    
+#     company_name = 'xyz'
+
+#     def __init__(self,emp_name,emp_dept):
+#         self.emp_name = emp_name
+#         self.emp_dept = emp_dept
+        
+#     def changes(self,new_company):  ## alternative to class method \\ instance method 
+#         self.company_name = new_company
+        
+#     @classmethod 
+#     def changesinclass(cls,new_company):
+#         cls.company_name = new_company
+    
+
+#     # def info(self): 
+#     def info(self):  ## when passsing normal parameters then external onece
+#         print(f"The employee {self.emp_name} works for {self.emp_dept} in {self.company_name}")  ## functions caleed as methods   ## when using self then inner variables 
+ 
+#  ## create an object of above class 
+#  #### STATIC METHODS
+#     #  @staticmethod
+#     # def addition =(x,y):
+#     # print(x+y)
+ 
+# emp_1 = employee('priya','it')     ## 
+# emp_2 = employee('niraj','farm')
+
+# emp_1.changesinclass("new_new_company")
+
+# print(emp_1.company_name)
+
+# # emp_1.changes("new_company")
+
+
+# emp_1.info()
+# emp_2.info()
+
+# emp_2.company_name = "LTFS"
+# print(emp_2.company_name)
+# emp_2.info()
+
+# employee.company_name = "flipkart ltd"  ## changes value of object attributes
+
+# emp_1.info()  ## but like this changes are not recommeds so for create for this new function
+
+############# GETTERS & SETTERS ################### getters to get the value & setters is set the value 
+
 class employee():
     
     company_name = 'xyz'
@@ -498,44 +547,160 @@ class employee():
         self.emp_name = emp_name
         self.emp_dept = emp_dept
         
-    def changes(self,new_company):  ## alternative to class method \\ instance method 
-        self.company_name = new_company
+    @property ## getters
+    def info(self): 
+        print(f"The employee {self.emp_name} works for {self.emp_dept} in {self.company_name}") 
         
-    @classmethod 
-    def changesinclass(cls,new_company):
-        cls.company_name = new_company
+    @info.setter ##
+    def info(self,new_emp_details):
+        new_emp_name = new_emp_details[0]
+        new_emp_dept = new_emp_details[1]
+        
+        self.emp_name = new_emp_name
+        self.emp_dept = new_emp_dept
+        
+emp1 = employee('priyaaa','HR')
+emp1.info = ['priya_p','mart'] ## setters
+print(emp1.info) ## getters 
+
+
+########  INHERITANCE ################## suppose you have multiple class for ex: comapamy \ employee \ hobbies 
+## so all the functions and variables methodes\attributes of parents class will import or inherit from parent
+## single level \ multi level \ multiple level 
+
+## single level 
+class company():
     
+    def __init__(self,comp_name,country):
+        self.comp_name = comp_name
+        self.country = country
+    
+    def company_info(self):
+        print(f"Company name is {self.comp_name} in {self.country}")
+        
+class employee(company):  ## using above calss as a child attribute then this is single level inhert
+    
+    def __init__(self,emp_name,comp_name,country):
+        self.emp_name = emp_name
+        
+        
+        company.__init__(self,comp_name,country)
+        ##self.comp_name = comp_name
+    
+    def employee_info(self):
+        print(f"Employee name is {self.emp_name}")
+        
+    def company_info_child(self):
+        print("This is running from employee class")
+        company.company_info(self)
+        
+        
+emp1 = employee("rahul","L&T Finance","USA") 
 
-    # def info(self): 
-    def info(self):  ## when passsing normal parameters then external onece
-        print(f"The employee {self.emp_name} works for {self.emp_dept} in {self.company_name}")  ## functions caleed as methods   ## when using self then inner variables 
- 
- ## create an object of above class 
- #### STATIC METHODS
-    #  @staticmethod
-    # def addition =(x,y):
-    # print(x+y)
- 
-emp_1 = employee('priya','it')     ## 
-emp_2 = employee('niraj','farm')
+emp1.company_info_child()
+  
+## With constructors if we have missing any attributes of parent so it will give an error so replicate all the variables and attributes also in constructors
 
-emp_1.changesinclass("new_new_company")
+## Multiple Inheritance ##
 
-print(emp_1.company_name)
+class company():  ## parent 1
+    
+    def __init__(self,comp_name):
+        self.comp_name = comp_name
 
-# emp_1.changes("new_company")
+    
+    def company_info(self):
+        print(f"Company name is {self.comp_name}")
+
+class country(): ## parent 2
+    
+    def __init__(self,country_name):
+        self.country_name = country_name
+        
+    def country_info(self):
+        print(f"country name is {self.country_name}")       
+        
+        
+class employee(company,country): ##child one 
+    def __init__(self,emp_name,comp_name,country_name):
+        self.emp_name = emp_name
+        
+        
+        company.__init__(self,comp_name)
+        
+        country.__init__(self,country_name)
+        ##self.comp_name = comp_name
+        
+        
+    def full_info(self):
+        print(f"The employee {self.emp_name} lives in {self.country_name}, and works for {self.comp_name}")    
+    
+    def all_info_child(self):
+        print("This is running from employee class")
+        company.company_info(self)
+        country.country_info(self)
+        
+        
+emp1 = employee("rahul","L&T Finance","USA") 
+
+emp1.full_info()
+emp1.all_info_child()
+
+## ------------------ ## Multi level Inheritance ##
+
+class company():  ## parent 1
+    
+    def __init__(self,comp_name):
+        self.comp_name = comp_name
+
+    
+    def company_info(self):
+        print(f"Company name is {self.comp_name}")
+        
+        
+class department(company):
+    
+    def __init__(self,dept_name,comp_name):
+        self.dept_name = dept_name
+        company.__init__(self,comp_name)
+         
+         
+    def department_info(self):
+        print(f"The department is {self.dept_name} of {self.comp_name}")     
+        
+        
+class employee(department): ##child one 
+    def __init__(self,emp_name,dept_name,comp_name):
+        self.emp_name = emp_name
+        department.__init__(self,dept_name,comp_name)
+        
+    def all_info(self):
+        print(f"The department is {self.dept_name} of {self.comp_name} employee name is {self.emp_name}") 
+       
+        
+emp1 = employee("Rahul","HR","L&T Finance") 
+
+emp1.all_info()
+emp1.department_info()
+emp1.company_info()
+
+## -------------------- done with inheritance -------------------------------##
+
+## Multi Threading ## -----------
+## you can just run your programme parallelly 
+
+import time
+import random
+from concurrent.futures import ThreadPoolExecutor
+  
+
+def my_fun(p_x):
+    wait = (random.randint(1,15))
+    time.sleep(wait)
+    # wait = time.sleep(random.randint(1,15))
+    print(f"I am {p_x}. I took {wait} seconds")
+
+my_fun(100)
 
 
-emp_1.info()
-emp_2.info()
-
-emp_2.company_name = "LTFS"
-print(emp_2.company_name)
-emp_2.info()
-
-employee.company_name = "flipkart ltd"  ## changes value of object attributes
-
-emp_1.info()  ## but like this changes are not recommeds so for create for this new function
-
-############# GETTERS & SETTERS ###################
 
