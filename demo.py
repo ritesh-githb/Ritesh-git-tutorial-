@@ -689,18 +689,66 @@ emp1.company_info()
 ## Multi Threading ## -----------
 ## you can just run your programme parallelly 
 
+# import time
+# import random
+# from concurrent.futures import ThreadPoolExecutor
+  
+  
+# tables = ['orders','customers','products','review','cancel_orders'] 
+
+# def my_fun(i):
+#     wait = (random.randint(1,15))
+#     time.sleep(wait)
+#     # wait = time.sleep(random.randint(1,15))
+#     print(f"I am {i}. I took {wait} seconds")
+# for i in tables:
+#     my_fun(i)
+## --------------------------------------
+
 import time
 import random
 from concurrent.futures import ThreadPoolExecutor
   
+  
+tables = ['orders','customers','products','review','cancel_orders'] 
 
-def my_fun(p_x):
-    wait = (random.randint(1,15))
+def my_fun(i):
+    wait = 3
     time.sleep(wait)
     # wait = time.sleep(random.randint(1,15))
-    print(f"I am {p_x}. I took {wait} seconds")
-
-my_fun(100)
+    print(f"I am {i}. I took {wait} seconds")
 
 
+with ThreadPoolExecutor(max_workers=len(tables)) as executer:
+    
+    ## futures = executer.map(my_fun,tables)
+
+    for i in tables:
+        future = executer.submit(my_fun,i)
+## --------- REQUESTS ---------
+## API -- application programming interface --
+
+# import requests
+
+# response = requests.get("https://dummyjson.com/posts/search?q=love")
+
+# print(response.status_code)
+
+# data = response.json()
+
+# print(data)
+
+
+## sucsses code is 200 & for error 404 
+## OS Module in Python 
+
+import os
+cwd = os.getcwd()
+print("current_working_dir",cwd)
+
+# os.makedirs("C:\Users\ven05825\Documents\Ritesh")
+
+# os.rmdir("---")
+
+# os.path.abspath("demo.py")
 
